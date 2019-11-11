@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('temp-humi-sht31', {
+        category: 'grove',
+        color: '#7cb342',
+        defaults: {
+            name: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-microchip",
+        label: function() {
+            return this.name || "temp humi sht31";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="temp-humi-sht31">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="temp-humi-sht31">
+    <p>#101020212 Grove - Temperature&Humidity Sensor (SHT31)</p>
+</script>
