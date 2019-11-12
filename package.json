@@ -7,6 +7,10 @@
   },
   "author": "matsujirushi",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matsujirushi/node-red-contrib-grove-nodes.git"
+  },
   "node-red" : {
     "nodes": {
         "lower-case": "temp-humi-sht31-node.js"
