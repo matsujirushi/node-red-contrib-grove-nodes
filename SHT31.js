@@ -6,8 +6,13 @@ const sleep = msec => new Promise(resolve => setTimeout(resolve, msec));
 
 module.exports = class SHT31 {
     constructor(bus, slaveAddress) {
+        this.REPEATABILITY_HIGH = 0;
+        this.REPEATABILITY_MEDIUM = 1;
+        this.REPEATABILITY_LOW = 2;
+
         this._Bus = bus;
         this._SlaveAddress = slaveAddress;
+        this.Repeatability = this.REPEATABILITY_HIGH;
     }
 
     Init() {
@@ -17,8 +22,23 @@ module.exports = class SHT31 {
 
     async Read() {
         const sendData = Buffer.from([ 0x24, 0x00 ]);
+        let duration;
+        switch (this.Repeatability) {
+            case this.REPEATABILITY_HIGH:
+                sendData[1] = 0x00;
+                duration = 15;
+                break;
+            case this.REPEATABILITY_MEDIUM:
+                sendData[1] = 0x0b;
+                duration = 6;
+                break;
+            case this.REPEATABILITY_LOW:
+                sendData[1] = 0x16;
+                duration = 4;
+                break;
+        }
         this._Device.write(sendData);
-        await sleep(15);
+        await sleep(duration);
 
         const recvData = this._Device.read(2 + 1 + 2 + 1);
 

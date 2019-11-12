@@ -3,7 +3,8 @@
         category: 'grove',
         color: '#7cb342',
         defaults: {
-            name: { value: "" }
+            name: { value: "" },
+            repeatability: { value: "High" }
         },
         inputs: 1,
         outputs: 1,
@@ -18,6 +19,14 @@
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-repeatability"><i class="icon-tag"></i> Repeatability</label>
+        <select id="node-input-repeatability">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
     </div>
 </script>
 
