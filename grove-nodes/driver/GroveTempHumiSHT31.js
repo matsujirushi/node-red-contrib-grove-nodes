@@ -21,6 +21,20 @@ module.exports = class GroveTempHumiSHT31 {
     }
 
     async Read() {
+        function CalcCRC8(data, offset, length) {
+            let crc = 0xff;
+
+            for (let j = 0; j < length; j++) {
+                crc ^= data.readUInt8(j + offset);
+
+                for (let i = 8; i > 0; i--) {
+                    crc = (crc & 0x80 ? crc << 1 ^ 0x31 : crc << 1) & 0xff;
+                }
+            }
+
+            return crc;
+        }
+
         const sendData = Buffer.from([ 0x24, 0x00 ]);
         let duration;
         switch (this.Repeatability) {
@@ -42,7 +56,8 @@ module.exports = class GroveTempHumiSHT31 {
 
         const recvData = this._Device.read(2 + 1 + 2 + 1);
 
-        // TODO Check CRC8
+        if (recvData[2] != CalcCRC8(recvData, 0, 2)) console.log('ERROR!'); // TODO
+        if (recvData[5] != CalcCRC8(recvData, 3, 2)) console.log('ERROR!'); // TODO
 
         const ST = recvData.readUInt16BE(0);
         const SRH = recvData.readUInt16BE(3);
