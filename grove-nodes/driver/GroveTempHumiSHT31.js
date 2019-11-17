@@ -4,7 +4,7 @@ const mraa = require('mraa');
 
 const sleep = msec => new Promise(resolve => setTimeout(resolve, msec));
 
-module.exports = class SHT31 {
+module.exports = class GroveTempHumiSHT31 {
     constructor(bus, slaveAddress) {
         this.REPEATABILITY_HIGH = 0;
         this.REPEATABILITY_MEDIUM = 1;

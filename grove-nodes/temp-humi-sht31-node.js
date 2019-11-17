@@ -1,6 +1,6 @@
 'use strict';
 
-const SHT31 = require('./SHT31.js');
+const GroveTempHumiSHT31 = require('./driver/GroveTempHumiSHT31.js');
 
 module.exports = function(RED) {
     function TempHumiSHT31Node(config) {
@@ -8,7 +8,7 @@ module.exports = function(RED) {
         const node = this;
         this.repeatability = config.repeatability;
 
-        this._Sensor = new SHT31(0, 0x45);
+        this._Sensor = new GroveTempHumiSHT31(0, 0x45);
         this._Sensor.Init();
         switch (config.repeatability) {
             case 'High':
