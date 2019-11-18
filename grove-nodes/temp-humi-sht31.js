@@ -3,12 +3,12 @@
 const GroveTempHumiSHT31 = require('./driver/GroveTempHumiSHT31.js');
 
 module.exports = function(RED) {
-    function TempHumiSHT31Node(config) {
+    function TempHumiSHT31(config) {
         RED.nodes.createNode(this, config);
         const node = this;
         this.repeatability = config.repeatability;
 
-        this._Sensor = new GroveTempHumiSHT31(0, 0x45);
+        this._Sensor = new GroveTempHumiSHT31(0, 0x44);
         this._Sensor.Init();
         switch (config.repeatability) {
             case 'High':
@@ -37,5 +37,5 @@ module.exports = function(RED) {
         });
     }
 
-    RED.nodes.registerType("temp-humi-sht31", TempHumiSHT31Node);
+    RED.nodes.registerType("temp-humi-sht31", TempHumiSHT31);
 }

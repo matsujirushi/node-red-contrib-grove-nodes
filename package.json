@@ -13,7 +13,7 @@
   },
   "node-red" : {
     "nodes": {
-        "temp-humi-sht31": "grove-nodes/temp-humi-sht31-node.js"
+        "temp-humi-sht31": "grove-nodes/temp-humi-sht31.js"
     }
   }
 }
