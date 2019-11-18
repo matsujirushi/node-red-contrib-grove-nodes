@@ -50,14 +50,16 @@ module.exports = class GroveTempHumiSHT31 {
                 sendData[1] = 0x16;
                 duration = 4;
                 break;
+            default:
+                throw new Error('Invalid value for Repeatability');
         }
         this._Device.write(sendData);
         await sleep(duration);
 
         const recvData = this._Device.read(2 + 1 + 2 + 1);
 
-        if (recvData[2] != CalcCRC8(recvData, 0, 2)) console.log('ERROR!'); // TODO
-        if (recvData[5] != CalcCRC8(recvData, 3, 2)) console.log('ERROR!'); // TODO
+        if (recvData[2] != CalcCRC8(recvData, 0, 2)) throw new Error('CRC8 mismatch');
+        if (recvData[5] != CalcCRC8(recvData, 3, 2)) throw new Error('CRC8 mismatch');
 
         const ST = recvData.readUInt16BE(0);
         const SRH = recvData.readUInt16BE(3);

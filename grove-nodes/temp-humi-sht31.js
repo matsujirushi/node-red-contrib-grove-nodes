@@ -23,14 +23,22 @@ module.exports = function(RED) {
         }
 
         node.on('input', async function(msg, send, done) {
-            await this._Sensor.Read();
+            try {
+                await this._Sensor.Read();
 
-            msg.payload = {
-                "temperature": this._Sensor.Temperature,
-                "humidity": this._Sensor.Humidity
-            };
-            send(msg);
-            
+                msg.payload = {
+                    "temperature": this._Sensor.Temperature,
+                    "humidity": this._Sensor.Humidity
+                };
+                send(msg);
+            }
+            catch (e) {
+                if (done) {
+                    done(e.message);
+                } else {
+                    node.error(e.message, msg);
+                }
+            }
             if (done) {
                 done();
             }
