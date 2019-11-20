@@ -14,7 +14,7 @@ module.exports = function(RED) {
             try {
                 if (!this._ModuleInitialized) {
                     await this._Module.Init();
-                    this._ModuleInitialized = false;
+                    this._ModuleInitialized = true;
                 }
 
                 switch (msg.payload) {
