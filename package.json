@@ -14,7 +14,8 @@
   "node-red" : {
     "nodes": {
         "temp-humi-sht31": "grove-nodes/temp-humi-sht31.js",
-        "button": "grove-nodes/buzzer.js"
+        "buzzer": "grove-nodes/buzzer.js",
+        "button": "grove-nodes/button.js"
     }
   }
 }
